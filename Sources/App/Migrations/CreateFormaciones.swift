@@ -13,7 +13,7 @@ struct CreateFormaciones:AsyncMigration {
         try await database.schema(Formacion.schema)
             .id()
             .field(.nombre, .string, .required)
-            .field(.nivel, .UUID, .references(Nivel.schema, .id, onDelete: .setNull) .required)
+            .field(.nivel, .uuid, .references(Nivel.schema, .id, onDelete: .setNull), .required)
             .field(.duracion, .int, .required)
             .field(.fechaInicio, .date, .required)
             .unique(on: .nombre)

@@ -8,6 +8,8 @@
 import Vapor
 import Fluent
 
+typealias Formaciones = [Formacion]
+
 final class Formacion:Model, Content {
     static let schema = "formaciones"
     

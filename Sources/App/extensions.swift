@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Vapor
 
 extension DateFormatter {
     static let formatter:DateFormatter = {
@@ -13,4 +14,12 @@ extension DateFormatter {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+}
+
+func decode<T:Content>(req:Request, type:T.Type) throws -> T {
+    do {
+        return try req.content.decode(type)
+    } catch {
+        throw Abort(.badRequest, reason: "JSON de entrada no válido")
+    }
 }

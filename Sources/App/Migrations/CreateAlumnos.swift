@@ -11,11 +11,11 @@ import Fluent
 struct CreateAlumnos:AsyncMigration {
     func prepare(on database: Database) async throws {
         try await database.schema(Alumno.schema)
-            .id()
+            .field(.id, .int, .identifier(auto: true))
             .field(.nombre, .string, .required)
             .field(.apellidos, .string, .required)
             .field(.nacimiento, .date)
-            .field(.empresa, .uuid, .references(Empresa.schema, .id, onDelete: .setNull), .required)
+            .field(.empresa, .uuid, .references(Empresa.schema, .id, onDelete: .setNull))
             .create()
     }
     

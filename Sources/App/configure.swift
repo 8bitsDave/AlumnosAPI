@@ -18,7 +18,14 @@ public func configure(_ app: Application) throws {
             database: Environment.get("DATABASE_NAME") ?? "vapor_database"
         ), as: .psql)
     }
-
+    
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .formatted(.formatter)
+    ContentConfiguration.global.use(decoder: decoder, for: .json)
+    let encoder = JSONEncoder()
+    encoder.dateEncodingStrategy = .formatted(.formatter)
+    ContentConfiguration.global.use(encoder: encoder, for: .json)
+    
     app.migrations.add(CreateEmpresas())
     app.migrations.add(CreateAlumnos())
     app.migrations.add(CreateNiveles())

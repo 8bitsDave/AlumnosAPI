@@ -8,7 +8,9 @@
 import Vapor
 import Fluent
 
-final class Nivel:Model, Codable {
+typealias Niveles = [Nivel]
+
+final class Nivel:Model, Content {
     static let schema = "niveles"
     
     @ID(key: .id) var id: UUID?
@@ -22,4 +24,8 @@ final class Nivel:Model, Codable {
         self.id = id
         self.nombre = nombre
     }
+}
+
+struct CreateNivel:Content {
+    let nombre:String
 }
